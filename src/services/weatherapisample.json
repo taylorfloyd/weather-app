@@ -1,0 +1,44 @@
+{
+    "coord": {
+        "lon": -81.5347,
+        "lat": 35.9053
+    },
+    "weather": [
+        {
+            "id": 800,
+            "main": "Clear",
+            "description": "clear sky",
+            "icon": "01d"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 283.48,
+        "feels_like": 281.95,
+        "temp_min": 281.59,
+        "temp_max": 287.28,
+        "pressure": 1024,
+        "humidity": 53
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 0.45,
+        "deg": 286,
+        "gust": 2.24
+    },
+    "clouds": {
+        "all": 0
+    },
+    "dt": 1675621147,
+    "sys": {
+        "type": 2,
+        "id": 2003243,
+        "country": "US",
+        "sunrise": 1675599812,
+        "sunset": 1675637804
+    },
+    "timezone": -18000,
+    "id": 4475640,
+    "name": "Lenoir",
+    "cod": 200
+}
