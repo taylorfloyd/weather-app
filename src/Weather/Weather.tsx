@@ -1,9 +1,14 @@
 
+/*
+The Weather interface defines the weather object.
 
+This is created from the Open Weather API weather JSON that
+is returned when getWeatherWithLatLong() is called from WeatherService.tsx 
+*/
 export interface Weather {
         coord : Coord,
         weather: WeatherInformation, 
-        base: String, 
+        base: string, 
         main: MainInformation, 
         visibility: Number, 
         wind: Wind, 
@@ -12,23 +17,40 @@ export interface Weather {
         sys: SysInformation, 
         timezone: Number, 
         id: Number, 
-        name: String, 
+        name: string, 
         cod: Number
 }
 
+/*
+The Coord interface defines the Coord object.
 
+This is created from the Open Weather API weather JSON that
+is returned when getWeatherWithLatLong() is called from WeatherService.tsx 
+*/
 export interface Coord {
     lon: Number; 
     lat: Number;
 }
 
+/*
+The WeatherInformation interface defines the Coord object.
+
+This is created from the Open Weather API weather JSON that
+is returned when getWeatherWithLatLong() is called from WeatherService.tsx 
+*/
 export interface WeatherInformation {
     id: Number; 
-    main: String;
-    description: String;
-    icon: String;
+    main: string;
+    description: string;
+    icon: string;
 }
 
+/*
+The MainInformation interface defines the Coord object.
+
+This is created from the Open Weather API weather JSON that
+is returned when getWeatherWithLatLong() is called from WeatherService.tsx 
+*/
 export interface MainInformation {
         temp: Number;
         feels_like: Number;
@@ -38,23 +60,42 @@ export interface MainInformation {
         humidity: Number;
 }
 
+/*
+The Wind interface defines the Coord object.
+
+This is created from the Open Weather API weather JSON that
+is returned when getWeatherWithLatLong() is called from WeatherService.tsx 
+*/
 export interface Wind {
     speed: Number; 
     deg: Number;
     gust: Number;
 }
 
+/*
+The Clouds interface defines the Coord object.
+
+This is created from the Open Weather API weather JSON that
+is returned when getWeatherWithLatLong() is called from WeatherService.tsx 
+*/
 export interface Clouds {
     all: Number; 
 }
 
+/*
+The SysInformation interface defines the Coord object.
+
+This is created from the Open Weather API weather JSON that
+is returned when getWeatherWithLatLong() is called from WeatherService.tsx 
+*/
 export interface SysInformation {
-        country: String, 
+        country: string, 
         id: Number, 
         sunrise: Number, 
         sunset: Number, 
         type: Number
 }
+
 
 export const emptyCoord: Coord =     
 {

@@ -13,8 +13,10 @@ This application uses the [Open Weather API](https://openweathermap.org/) for we
 Any user of this application is expected to sign up as a user with Open Weather. 
 
 Once you receive your OpenWeather API Key, add the following to your .env file in the main directory:
-    REACT_APP_API_URL = 'https://api.openweathermap.org/data/2.5'
-    REACT_APP_API_KEY = [API KEY]
+```
+REACT_APP_API_URL = 'https://api.openweathermap.org'
+REACT_APP_API_KEY = [API KEY]
+```
 
 # Getting Started with Create React App
 

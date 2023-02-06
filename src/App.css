@@ -35,14 +35,10 @@
 
 .App-logo-link {
   color: #61dafb;
-  padding: 2px;
+  padding: 0 1vh 0 1vh;
+  margin: 1vh 0 1vh 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.App-logo-link-text {
+  margin: 1vh 0 1vh 0 !important;
 }

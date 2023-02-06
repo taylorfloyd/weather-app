@@ -1,0 +1,15 @@
+.LocationForm {
+    width: 50%;
+    max-width: 65vh;
+    min-width: 55vh;
+    margin: auto;
+    padding-bottom: 5vh;
+}
+
+.LocationForm-Group {
+    padding: 1vh;
+}
+
+.LocationForm-Label {
+    text-align: left;
+}
