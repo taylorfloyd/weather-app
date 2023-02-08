@@ -1,7 +1,7 @@
 .LocationForm {
     width: 50%;
-    max-width: 65vh;
-    min-width: 55vh;
+    max-width: 75vh;
+    min-width: 65vh;
     margin: auto;
     padding-bottom: 5vh;
 }
@@ -12,4 +12,8 @@
 
 .LocationForm-Label {
     text-align: left;
+}
+
+.LocationForm-Validation {
+    font-size: 1rem !important;
 }

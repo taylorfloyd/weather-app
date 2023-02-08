@@ -1,11 +1,13 @@
 import logo from './icons8-weather.svg';
 import './App.css';
 import React, { useEffect, useState } from "react";
-import getWeatherWithLatLong from './services/WeatherService';
-import { Weather, Coord, emptyWeatherObject } from './Weather/Weather';
-import LocationForm from './LocationForm/LocationForm';
-import {Geolocation} from './Geolocation/Geolocation';
-import getLatLong from './services/GeocodingService';
+import getWeatherWithLatLong from './Services/WeatherService';
+import { Weather, emptyWeatherObject } from './Components/Weather/Weather';
+import LocationForm from './Components/LocationForm/LocationForm';
+import {Geolocation} from './Components/Geolocation/Geolocation';
+import getLatLong from './Services/GeocodingService';
+import ModalLocationError from './Components/ModalLocationError/ModalLocationError';
+import ModalWeatherError from './Components/ModalWeatherError/ModalWeatherError';
   /*
   App is the root of the Weather App Web Application.
   It renders the LocationForm component, as well as its own
@@ -15,15 +17,14 @@ import getLatLong from './services/GeocodingService';
   */
 function App() {
 
-  // Coordinates of weather location
-  // const [coordinates, setCoordinates] = useState<Coord>({lat: 35.9053, lon: -81.5347});
-  const [coordinates, setCoordinates] = useState<Coord>({lat: 35.9053, lon: -81.5347});
-
   // Full JSON returned from getWeatherWithLatLong
   const [weatherjson, setWeatherjson] = useState<Weather>(emptyWeatherObject);
 
-  // Indicates there was an API Call error
-  const [errorState, setErrorState] = useState(false);
+  // Indicates there was an API Call error with getting the location
+  const [locationErrorState, setLocationErrorState] = useState(false);
+
+    // Indicates there was an API Call error with getting the weather
+    const [weatherErrorState, setWeatherErrorState] = useState(false);
 
   // Initial state of application before entering location information
   const [initialState, setInitialState] = useState(true);
@@ -47,10 +48,9 @@ function App() {
       .then(response => {
         if(response) {
           setGeoLocation(response);
-          console.log('response in useeffect', response);
         } else {
-          console.log('error', response);
-          setErrorState(true);
+          setLocationErrorState(true);
+          setInitialState(true);
         }
       });
     }
@@ -69,27 +69,39 @@ function App() {
       .then(response => {
         if(response) {
           setWeatherjson(response);
-          console.log('response in useeffect', response);
           setInitialState(false);
         } else {
-          console.log('error', response);
-          setErrorState(true);
+          setWeatherErrorState(true);
         }
       });
     }
   }, [geolocation]);
 
 /*
-This function is called from inside the LocationForm component upon 
-form submission. It is passed as a property into this component. 
+  This function is called from inside the LocationForm component upon 
+  form submission. It is passed as a property into this component. 
 
-Arguments: zipCode (string) and countryCode (string)
+  Arguments: zipCode (string) and countryCode (string)
 */
  const onFormSubmit = (zipCode: string, countryCode: string) => {
-  console.log('IN APP:', zipCode, countryCode);
-
   //this triggers the useEffect that calls getLatLong
   setUserInput({zip: zipCode, country: countryCode})
+ }
+
+ /*
+  This function handles closing the modal for
+  location API errors.
+ */
+ const handleCloseModalLocationError = () => {
+    setLocationErrorState(false);
+ }
+
+  /*
+  This function handles closing the modal for
+  weather API errors.
+ */
+  const handleCloseModalWeatherError = () => {
+    setWeatherErrorState(false);
  }
 
 
@@ -101,20 +113,17 @@ Arguments: zipCode (string) and countryCode (string)
           Weather Application
         </p>
         <LocationForm onFormSubmit={onFormSubmit} />
-        {errorState ? 
-        <p>
-          There was an error getting the current weather. Please try again.
-        </p>
-        : 
-        (initialState ? 
+          {initialState ? 
           <p>
             Enter location information to view current weather conditions.
           </p>
           :
         <div>
+          {(geolocation && geolocation.lat && geolocation.lon) &&
           <p>
-          {coordinates.lat.toString()} Lat, {coordinates.lon.toString()} Long
+          {geolocation.lat.toString()} Lat, {geolocation.lon.toString()} Long
           </p>
+          }
           <p>
           Location: {weatherjson.name}, {weatherjson.sys.country}
           </p>
@@ -122,7 +131,7 @@ Arguments: zipCode (string) and countryCode (string)
           Current Temp: {weatherjson.main.temp.toString()}
           </p>
         </div>
-        )}
+          }
       </header>
       <footer className="App-footer">
       <a 
@@ -141,6 +150,8 @@ Arguments: zipCode (string) and countryCode (string)
           Icons8
         </a>
       </footer>
+      <ModalLocationError triggerShow={locationErrorState} handleClose={handleCloseModalLocationError}/>
+      <ModalWeatherError triggerShow={weatherErrorState} handleClose={handleCloseModalWeatherError}/>
     </div>
   );
 }

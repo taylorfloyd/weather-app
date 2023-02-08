@@ -1,4 +1,4 @@
-import { Geolocation } from "../Geolocation/Geolocation";
+import { Geolocation } from "../Components/Geolocation/Geolocation";
     /*
     getLatLong calls "Coordinates by zip/post code" from the 
     Open Weather API's Geocoding API
@@ -22,8 +22,7 @@ import { Geolocation } from "../Geolocation/Geolocation";
         return fetch(`${process.env.REACT_APP_API_URL}/geo/1.0/zip?zip=${geolocation.zip},${geolocation.country}&appid=${process.env.REACT_APP_API_KEY}`)
         .then((response) => response.ok ? response.json(): Promise.reject(new Error()))
         .catch((err) => {
-          console.log("Error getting geolocation with zip code/country code in service");
-          console.log(err);
+          console.log("Error getting geolocation with zip code/country code:", err);
         });
         
     }

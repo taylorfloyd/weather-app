@@ -1,4 +1,4 @@
-import { Geolocation } from "../Geolocation/Geolocation";    /*
+import { Geolocation } from "../Components/Geolocation/Geolocation";    /*
     getWeatherWithLatLong calls "Current Weather Data" from  Open Weather API 
 
     This is linked here: https://openweathermap.org/current 
@@ -18,8 +18,7 @@ export default function getWeatherWithLatLong(geolocation: Geolocation) {
     return fetch(`${process.env.REACT_APP_API_URL}/data/2.5/weather?lat=${geolocation.lat}&lon=${geolocation.lon}&appid=${process.env.REACT_APP_API_KEY}`)
     .then((response) => response.ok ? response.json(): Promise.reject(new Error()))
     .catch((err) => {
-      console.log("Error getting weather with lat/long in service");
-      console.log(err);
+      console.log("Error getting weather with lat/long in service", err);
     });
     
 }

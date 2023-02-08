@@ -4,12 +4,13 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useState } from 'react';
 import './LocationForm.css';
-import FormControlElement from 'react-bootstrap/Form'
+import { countryList } from './countryList';
 
   /*
     This sets the properties for the LocationForm component
 
     Properties: OnFormSubmit (function with 2 args)
+f
   */
 interface locationFormProps {
     onFormSubmit: (zipCode: string, countryCode: string) => void;
@@ -27,10 +28,12 @@ interface locationFormProps {
 
     Properties are defined in locationFormProps interface.
   */
-function LocationForm(props:locationFormProps) {
+const LocationForm = (props:locationFormProps) => {
 
     const [zipCode, setZipCode] = useState<string>("");
     const [countryCode, setCountryCode] = useState<string>("");
+    const [validated, setValidated] = useState(false);
+
 
 
     /*
@@ -42,10 +45,17 @@ function LocationForm(props:locationFormProps) {
     Arguments: event: React.FormEvent<HTMLFormElement>
     */
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
+            const form = event.currentTarget;
             event.preventDefault();
-            props.onFormSubmit(zipCode, countryCode);
-            setZipCode("");
-            setCountryCode("");
+            event.stopPropagation();
+            if (form.checkValidity() === false) {
+                setValidated(true);
+            } else {
+                props.onFormSubmit(zipCode, countryCode);
+                setZipCode("");
+                setCountryCode("");
+                setValidated(false);
+            }
     };
 
     /*
@@ -55,7 +65,6 @@ function LocationForm(props:locationFormProps) {
     */
     const onZipCodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setZipCode(event.target.value);
-        console.log("zip", event.target.value);
     };
 
     /*
@@ -63,25 +72,36 @@ function LocationForm(props:locationFormProps) {
 
     It sets the state for countryCode.
     */
-    const onCountryCodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const onCountryCodeChange: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
         setCountryCode(event.target.value);
-        console.log("cc", event.target.value);
     };
 
     return (
         <div className="LocationForm">
-            <Form onSubmit={handleSubmit}>
+            <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 <Form.Group as={Row} className="LocationForm-Group" controlId="formZipCode">
                     <Form.Label  className="LocationForm-Label" column sm={6}>Zip Code</Form.Label>
                     <Col sm={6}>
-                        <Form.Control value={zipCode} onChange={onZipCodeChange} type="text" placeholder="Enter zip code" />
+                        <Form.Control required value={zipCode} onChange={onZipCodeChange} type="text" placeholder="Enter zip code" />
+                        <Form.Control.Feedback className="LocationForm-Validation" type="invalid">
+                            Please input a zip code.
+                        </Form.Control.Feedback>
                     </Col>
                 </Form.Group>
 
                 <Form.Group as={Row} className="LocationForm-Group" controlId="formCountryCode">
                     <Form.Label className="LocationForm-Label" column sm={6}>Country Code</Form.Label>
                     <Col sm={6}>
-                        <Form.Control value={countryCode} onChange={onCountryCodeChange} type="text" placeholder="Enter country code" />
+                        {/* <Form.Control value={countryCode} onChange={onCountryCodeChange} type="text" placeholder="Enter country code" /> */}
+                        <Form.Select required value={countryCode} onChange={onCountryCodeChange} >
+                            <option value="" disabled>Select country</option>
+                            {countryList.map((country) => <option key={country.name} value={country.code}>{country.name}</option>)}
+                            {/* <option value="US">United States</option>
+                            <option value="UK">United Kingdom</option>                         */}
+                        </Form.Select>
+                        <Form.Control.Feedback className="LocationForm-Validation" type="invalid">
+                            Please input a country code.
+                        </Form.Control.Feedback>
                     </Col>
                 </Form.Group>
                 <Button className="LocationForm-Button" variant="primary" type="submit">
