@@ -12,7 +12,7 @@ import { countryList } from './countryList';
     Properties: OnFormSubmit (function with 2 args)
 f
   */
-interface locationFormProps {
+export interface locationFormProps {
     onFormSubmit: (zipCode: string, countryCode: string) => void;
 }
 
@@ -77,34 +77,34 @@ const LocationForm = (props:locationFormProps) => {
     };
 
     return (
-        <div className="LocationForm">
-            <Form noValidate validated={validated} onSubmit={handleSubmit}>
+        <div className="LocationForm" >
+            <Form data-testid="location-form" noValidate validated={validated} onSubmit={handleSubmit}>
                 <Form.Group as={Row} className="LocationForm-Group" controlId="formZipCode">
-                    <Form.Label  className="LocationForm-Label" column sm={6}>Zip Code</Form.Label>
+                    <Form.Label  data-testid="location-form-zipcode-label" className="LocationForm-Label" column sm={6}>Zip Code</Form.Label>
                     <Col sm={6}>
-                        <Form.Control required value={zipCode} onChange={onZipCodeChange} type="text" placeholder="Enter zip code" />
-                        <Form.Control.Feedback className="LocationForm-Validation" type="invalid">
+                        <Form.Control data-testid="location-form-zipcode-value" required value={zipCode} onChange={onZipCodeChange} type="text" placeholder="Enter zip code" />
+                        <Form.Control.Feedback data-testid="location-form-zipcode-feedback" className="LocationForm-Validation" type="invalid">
                             Please input a zip code.
                         </Form.Control.Feedback>
                     </Col>
                 </Form.Group>
 
                 <Form.Group as={Row} className="LocationForm-Group" controlId="formCountryCode">
-                    <Form.Label className="LocationForm-Label" column sm={6}>Country Code</Form.Label>
+                    <Form.Label data-testid="location-form-countrycode-label" className="LocationForm-Label" column sm={6}>Country Code</Form.Label>
                     <Col sm={6}>
                         {/* <Form.Control value={countryCode} onChange={onCountryCodeChange} type="text" placeholder="Enter country code" /> */}
-                        <Form.Select required value={countryCode} onChange={onCountryCodeChange} >
+                        <Form.Select data-testid="location-form-countrycode-value" required value={countryCode} onChange={onCountryCodeChange} >
                             <option value="" disabled>Select country</option>
                             {countryList.map((country) => <option key={country.name} value={country.code}>{country.name}</option>)}
                             {/* <option value="US">United States</option>
                             <option value="UK">United Kingdom</option>                         */}
                         </Form.Select>
-                        <Form.Control.Feedback className="LocationForm-Validation" type="invalid">
+                        <Form.Control.Feedback data-testid="location-form-countrycode-feedback" className="LocationForm-Validation" type="invalid">
                             Please input a country code.
                         </Form.Control.Feedback>
                     </Col>
                 </Form.Group>
-                <Button className="LocationForm-Button" variant="primary" type="submit">
+                <Button data-testid="location-form-submit-button" className="LocationForm-Button" variant="primary" type="submit">
                     Submit
                 </Button>
             </Form>
