@@ -118,17 +118,12 @@ function App() {
             Enter location information to view current weather conditions.
           </p>
           :
-        <div>
-          {(geolocation && geolocation.lat && geolocation.lon) &&
-          <p>
-          {geolocation.lat.toString()} Lat, {geolocation.lon.toString()} Long
-          </p>
-          }
-          <p>
+        <div className="App-weather-display">
+          <p className="App-weather-display-text">
           Location: {weatherjson.name}, {weatherjson.sys.country}
           </p>
-          <p>
-          Current Temp: {weatherjson.main.temp.toString()}
+          <p className="App-weather-display-text">
+          Current Temp: {weatherjson.main.temp.toString()} °F
           </p>
         </div>
           }

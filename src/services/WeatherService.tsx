@@ -15,7 +15,7 @@ import { Geolocation } from "../Components/Geolocation/Geolocation";    /*
     */
 export default function getWeatherWithLatLong(geolocation: Geolocation) {
 
-    return fetch(`${process.env.REACT_APP_API_URL}/data/2.5/weather?lat=${geolocation.lat}&lon=${geolocation.lon}&appid=${process.env.REACT_APP_API_KEY}`)
+    return fetch(`${process.env.REACT_APP_API_URL}/data/2.5/weather?lat=${geolocation.lat}&lon=${geolocation.lon}&units=imperial&appid=${process.env.REACT_APP_API_KEY}`)
     .then((response) => response.ok ? response.json(): Promise.reject(new Error()))
     .catch((err) => {
       console.log("Error getting weather with lat/long in service", err);

@@ -3,7 +3,7 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 30vmin;
   pointer-events: none;
 }
 
@@ -41,4 +41,14 @@
 
 .App-logo-link-text {
   margin: 1vh 0 1vh 0 !important;
+}
+.App-weather-display {
+  padding: 2vh;
+  background-color: #E36001;
+  border-radius: .3rem;
+}
+
+.App-weather-display-text {
+  margin: 0;
+  text-align: left;
 }

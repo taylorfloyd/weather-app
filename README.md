@@ -36,7 +36,7 @@ REACT_APP_API_KEY = [API KEY]
 
 Clone weather-app with `git clone https://github.com/taylorfloyd/weather-app.git`
 
-### Run the application locally
+## Run the application locally
 
 This application uses npm (Node Package Manager). 
 
@@ -48,7 +48,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### Run tests locally
+## Run tests locally
 
 This application has various tests that leverage the react testing library.\
 All tests are located in the same directory as their corresponding component with the suffix `<component name>.test.tsx`.
