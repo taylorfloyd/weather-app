@@ -1,5 +1,3 @@
-# NOTE: APPLICATION IS IN DEVELOPMENT
-
 # Weather Application
 
 This project is a weather application for viewing daily weather in the user's current location. This project is still in development.
